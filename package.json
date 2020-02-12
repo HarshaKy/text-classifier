@@ -1,0 +1,26 @@
+{
+  "name": "text-classifier",
+  "version": "1.0.0",
+  "description": "text-classification api",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarshaKy/text-classifier.git"
+  },
+  "author": "Harsha Ky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarshaKy/text-classifier/issues"
+  },
+  "homepage": "https://github.com/HarshaKy/text-classifier#readme",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^1.5.2",
+    "require": "^2.4.20"
+  }
+}
