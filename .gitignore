@@ -131,3 +131,6 @@ dmypy.json
 # datasets
 *.tsv
 *.csv
+
+# waste
+*.bin
