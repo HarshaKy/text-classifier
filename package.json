@@ -21,6 +21,8 @@
   "homepage": "https://github.com/HarshaKy/text-classifier#readme",
   "dependencies": {
     "@tensorflow/tfjs-node": "^1.5.2",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
     "require": "^2.4.20"
   }
 }
