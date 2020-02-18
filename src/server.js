@@ -1,7 +1,11 @@
 const express = require('express')
+const path = require('path')
+const bodyParser = require('body-parser')
 const tf = require('@tensorflow/tfjs-node');
+
 global.fetch = require('node-fetch')
 const port = 3000
+
 var arr = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -17,15 +21,34 @@ var arr = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
 
 const app = express()
 
-app.get('/prediction', (req, res) => {
-    async function processModel(){
-        const model = await tf.loadLayersModel('file://models/sentiment/model.json')
-        prediciton = model.predict(tf.tensor(arr)).dataSync()[0]
-        res.send(`${prediciton}`)
-    }
+const publicDirPath = path.join(__dirname, '../public')
 
-    processModel()
-    // res.send("hello world")
+app.set('view engine', 'hbs')
+
+app.use(bodyParser.urlencoded({ extended: true}))
+app.use(express.static(path.join(publicDirPath)))
+
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Context Analyzer'
+    })
+})
+
+app.get('/sentiment', (req, res) => {
+    res.render('sentiment', {
+        title: 'Sentiment Analysis'
+    })
+})
+
+app.post('/predict', (req, res) => {
+    res.send(req.body.test)
+    // async function processModel(){
+    //     const model = await tf.loadLayersModel('file://models/sentiment/model.json')
+    //     prediciton = model.predict(tf.tensor(arr)).dataSync()[0]
+    //     res.send(`${prediciton}`)
+    // }
+
+    // processModel()
 })
 
 
