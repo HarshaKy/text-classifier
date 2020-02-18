@@ -45,15 +45,20 @@ app.get('/sentiment', (req, res) => {
     })
 })
 
-app.post('/predict', (req, res) => {
-    res.send(req.body.test)
-    // async function processModel(){
-    //     const model = await tf.loadLayersModel('file://models/sentiment/model.json')
-    //     prediciton = model.predict(tf.tensor(arr)).dataSync()[0]
-    //     res.send(`${prediciton}`)
-    // }
+app.post('/predict-sentiment', (req, res) => {
+    // res.send(req.body.test)
+    async function processModel(){
+        const model = await tf.loadLayersModel('file://models/sentiment/model.json')
+        prediciton = model.predict(tf.tensor(arr)).dataSync()[0]
+        // res.send(`${prediciton}`)
 
-    // processModel()
+        res.render('prediction', {
+            title: 'Sentiment Prediction',
+            prediction: prediciton
+        })
+    }
+
+    processModel()
 })
 
 app.get('/sentiment/*', (req, res) => {
