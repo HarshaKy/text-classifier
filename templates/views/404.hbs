@@ -7,11 +7,9 @@
 </head>
 <body>
     {{>header}}
- 
-    <form action="http://localhost:3000/predict" method="POST">
-        Input data: <input type="text" name="test">
-        <button type="submit">Predict</button>
-    </form>
+
+        <h1>{{errorMessage}}</h1>
+
     {{>footer}}
 </body>
 </html>

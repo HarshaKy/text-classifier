@@ -56,6 +56,19 @@ app.post('/predict', (req, res) => {
     // processModel()
 })
 
+app.get('/sentiment/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Invalid URL'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Invalid URL'
+    })
+})
 
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`);
