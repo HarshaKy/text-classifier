@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const hbs = require('hbs')
 const tf = require('@tensorflow/tfjs-node');
 
 global.fetch = require('node-fetch')
@@ -22,8 +23,12 @@ var arr = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
 const app = express()
 
 const publicDirPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
 
 app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
 
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(express.static(path.join(publicDirPath)))
