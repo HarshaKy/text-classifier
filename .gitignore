@@ -132,8 +132,8 @@ dmypy.json
 *.tsv
 *.csv
 
-# waste
-*.bin
+# # waste
+# *.bin
 
 # node modules
 node_modules/
