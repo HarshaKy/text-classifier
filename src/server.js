@@ -77,12 +77,12 @@ app.post('/predict-category', (req, res) => {
     async function processModel(){
         const model = await tf.loadLayersModel('file://models/news/model.json')
         prediciton = model.predict(tf.tensor(arr_news)).dataSync()
-        res.send(`${prediciton}`)
+        // res.send(`${prediciton}`)
 
-        // res.render('prediction', {
-        //     title: 'Sentiment Prediction',
-        //     prediction: prediciton
-        // })
+        res.render('prediction', {
+            title: 'Category Prediction',
+            prediction: prediciton
+        })
     }
 
     processModel()
