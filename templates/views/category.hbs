@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Analyzer / {{title}}</title>
+</head>
+<body>
+    {{>header}}
+ 
+    <form action="/predict-category" method="POST">
+        Input data: <input type="text" name="test">
+        <button type="submit">Predict</button>
+    </form>
+    {{>footer}}
+</body>
+</html>

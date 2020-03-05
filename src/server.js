@@ -7,7 +7,7 @@ const tf = require('@tensorflow/tfjs-node');
 global.fetch = require('node-fetch')
 const port = 3000
 
-var arr = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+var arr_sentiment = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -19,6 +19,11 @@ var arr = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
  1509, 1088,   32,   12,  149,  121, 2990, 4172,    1,    4,  990,
   863, 1354, 5628,   30,  441,  172, 1597,   80, 1138, 2707,  495,
  2483, 1839,  208, 4151,   24,   42, 2081,   31,   17]]
+
+
+var arr_news = [[ 9632, 35389,  2300,   765,   272,   761,   187,     2,  2398,
+    1274,   802,   254,   212,  1959,   118,   187,   680,    73,
+     581, 35388, 35388, 35388, 35388, 35388, 35388]]
 
 const app = express()
 
@@ -49,13 +54,35 @@ app.post('/predict-sentiment', (req, res) => {
     // res.send(req.body.test)
     async function processModel(){
         const model = await tf.loadLayersModel('file://models/sentiment/model.json')
-        prediciton = model.predict(tf.tensor(arr)).dataSync()[0]
+        prediciton = model.predict(tf.tensor(arr_sentiment)).dataSync()[0]
         // res.send(`${prediciton}`)
 
         res.render('prediction', {
             title: 'Sentiment Prediction',
             prediction: prediciton
         })
+    }
+
+    processModel()
+})
+
+app.get('/category', (req, res) => {
+    res.render('category', {
+        title: 'Category Prediction'
+    })
+})
+
+app.post('/predict-category', (req, res) => {
+    // res.send(req.body.test)
+    async function processModel(){
+        const model = await tf.loadLayersModel('file://models/news/model.json')
+        prediciton = model.predict(tf.tensor(arr_news)).dataSync()
+        res.send(`${prediciton}`)
+
+        // res.render('prediction', {
+        //     title: 'Sentiment Prediction',
+        //     prediction: prediciton
+        // })
     }
 
     processModel()
