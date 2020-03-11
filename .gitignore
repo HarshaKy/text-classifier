@@ -138,3 +138,6 @@ news.json
 
 # node modules
 node_modules/
+
+# playground folder
+playground/

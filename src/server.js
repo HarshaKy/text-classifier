@@ -53,17 +53,24 @@ app.get('/sentiment', (req, res) => {
 app.post('/predict-sentiment', (req, res) => {
     // res.send(req.body.test)
     async function processModel(){
-        const model = await tf.loadLayersModel('file://models/sentiment/model.json')
+        const model = await tf.loadLayersModel('file://../models/sentiment/model.json')
         prediciton = model.predict(tf.tensor(arr_sentiment)).dataSync()[0]
-        // res.send(`${prediciton}`)
+        
+        var spawn = require("child_process").spawn;
+        var process = await spawn('python',["./../utils/preprocess-sentiment.py", req.body.test, "asdf"] );
 
-        res.render('prediction', {
-            title: 'Sentiment Prediction',
-            prediction: prediciton
+        await process.stdout.on('data', function(data) { 
+            res.render('prediction', {
+                title: 'Sentiment Prediction',
+                prediction: data.toString()
+            })
         })
     }
 
     processModel()
+    
+    
+        
 })
 
 app.get('/category', (req, res) => {
