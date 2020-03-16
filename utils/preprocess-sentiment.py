@@ -1,22 +1,52 @@
 import sys 
+import nltk
+import re
+import numpy as np
+import pandas as pd
+
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from csv import reader
 
 inputString = sys.argv[1]
 
-arr = [[   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0, 1632, 1993,  328,   11, 2470,   44,    4,   84, 5602,   17,
-   15,  126,  760,   42, 1080, 1487,   63,  196,   13,  182,  495,
-  650,   63,   16,   74,   33,  242, 2161,   57,    1,  105, 2255,
-  977,   86, 1736,   41,   55,   41,  119,   14,  285,  146,  563,
- 1509, 1088,   32,   12,  149,  121, 2990, 4172,    1,    4,  990,
-  863, 1354, 5628,   30,  441,  172, 1597,   80, 1138, 2707,  495,
- 2483, 1839,  208, 4151,   24,   42, 2081,   31,   17]]
+stop_words = set(stopwords.words("english"))
+lemmatizer = WordNetLemmatizer()
 
+df = pd.DataFrame({'input':[inputString]})
 
+def clean_text(text):
+    text = re.sub(r'[^\w\s]','',text, re.UNICODE)
+    text = text.lower()
+    text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
+    text = [lemmatizer.lemmatize(token, "v") for token in text]
+    text = [word for word in text if not word in stop_words]
+    text = " ".join(text)
+    return text
 
-print(inputString)
+df['processed_input'] = df.input.apply(lambda x: clean_text(x))
 
-print(arr)
+df.processed_input.apply(lambda x: len(x.split(" "))).mean()
+
+max_features = 6000
+tokenizer = Tokenizer(num_words=max_features)
+tokenizer.fit_on_texts(df['processed_input'])
+list_tokenized = tokenizer.texts_to_sequences(df['processed_input'])
+
+maxlen = 130
+
+predictionArray = pad_sequences(list_tokenized, maxlen=maxlen)
+
+x = list(predictionArray)
+
+newList = []
+
+x = list(x[0])
+
+newList.append(x)
+
+print(newList)
+
+# print(arr)
