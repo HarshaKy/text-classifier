@@ -3,6 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const hbs = require('hbs')
 const tf = require('@tensorflow/tfjs-node');
+const fs = require('fs')
 
 global.fetch = require('node-fetch')
 const port = 3000
@@ -54,15 +55,28 @@ app.post('/predict-sentiment', (req, res) => {
     // res.send(req.body.test)
     async function processModel(){
         const model = await tf.loadLayersModel('file://../models/sentiment/model.json')
-        prediciton = model.predict(tf.tensor(arr_sentiment)).dataSync()[0]
+        // prediciton = model.predict(tf.tensor(arr_sentiment)).dataSync()[0]
         
         var spawn = require("child_process").spawn;
-        var process = await spawn('python',["./../utils/preprocess-sentiment.py", req.body.test, "asdf"] );
+        var process = await spawn('python',["./../utils/preprocess-sentiment.py", req.body.test] );
 
         await process.stdout.on('data', function(data) { 
+            
+            // var rawdata = fs.readFileSync('file://../utils/sample.json')
+            // var data = JSON.parse(rawdata);
+
+            var data = JSON.parse(data)
+
+            // console.log(data)
+
+            prediciton = model.predict(tf.tensor(data)).dataSync()[0]
+
+            // console.log(typeof data)
+            // console.log(prediciton)
+
             res.render('prediction', {
                 title: 'Sentiment Prediction',
-                prediction: data.toString()
+                prediction: prediciton
             })
         })
     }
