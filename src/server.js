@@ -8,9 +8,8 @@ const fs = require('fs')
 global.fetch = require('node-fetch')
 const port = 3000
 
-var arr_news = [[ 9632, 35389,  2300,   765,   272,   761,   187,     2,  2398,
-    1274,   802,   254,   212,  1959,   118,   187,   680,    73,
-     581, 35388, 35388, 35388, 35388, 35388, 35388]]
+var arr_news = [[  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+          0,   0,   0,   0,   0,   0,   0,   0,   0,  55, 363, 801]]
 
 const app = express()
 
@@ -84,7 +83,7 @@ app.get('/category', (req, res) => {
 app.post('/predict-category', (req, res) => {
     // res.send(req.body.test)
     async function processModel(){
-        const model = await tf.loadLayersModel('file://models/news/model.json')
+        const model = await tf.loadLayersModel('file://../models/news/model.json')
         prediciton = model.predict(tf.tensor(arr_news)).dataSync()
         // res.send(`${prediciton}`)
 
