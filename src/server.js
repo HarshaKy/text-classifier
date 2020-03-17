@@ -85,14 +85,20 @@ app.post('/predict-category', (req, res) => {
     async function processModel(){
         const model = await tf.loadLayersModel('file://../models/news/model.json')
         
+        console.log('before python')
+
         var spawn = require("child_process").spawn;
         var process = await spawn('python',["./../utils/preprocess-news.py", req.body.test] );
 
+        console.log('after python')
+
         await process.stdout.on('data', function(data) { 
 
+            console.log('inside function')
+            
             var data = JSON.parse(data)
 
-            // console.log(data)
+            console.log(data)
 
             prediciton = model.predict(tf.tensor(data)).dataSync()
 

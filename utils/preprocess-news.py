@@ -1,57 +1,55 @@
-import sys 
-import nltk
-import re
-import numpy as np
-import pandas as pd
+# import sys 
+# import pandas as pd
 
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+# from tensorflow.keras.preprocessing import sequence
+# from gensim.corpora import Dictionary
 
-inputString = sys.argv[1]
+# import spacy
+# nlp = spacy.load('en')
 
-stop_words = set(stopwords.words("english"))
-lemmatizer = WordNetLemmatizer()
-
-df = pd.DataFrame({'input':[inputString]})
-
-def clean_text(text):
-    text = re.sub(r'[^\w\s]','',text, re.UNICODE)
-    text = text.lower()
-    text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
-    text = [lemmatizer.lemmatize(token, "v") for token in text]
-    text = [word for word in text if not word in stop_words]
-    text = " ".join(text)
-    return text
-
-df['processed_input'] = df.input.apply(lambda x: clean_text(x))
-
-df.processed_input.apply(lambda x: len(x.split(" "))).mean()
-
-max_features = 1000
-tokenizer = Tokenizer(num_words=max_features)
-tokenizer.fit_on_texts(df['processed_input'])
-list_tokenized = tokenizer.texts_to_sequences(df['processed_input'])
-
-maxlen = 25
-
-predictionArray = pad_sequences(list_tokenized, maxlen=maxlen)
-
-x = list(predictionArray)
-
-newList = []
-
-x = list(x[0])
-
-newList.append(x)
-
-print(newList)
-
-# arr = [[  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-#           0, 918,  25, 102, 288,   4, 642, 939, 668,  11, 463, 514]]
-
-# print(arr)
+# dictionary = Dictionary.load('dictionary')
 
 # inputString = sys.argv[1]
-# print(df['processed_input'])
+# df = pd.DataFrame()
+
+# df['input'] = pd.DataFrame({'input':[inputString]})
+
+# MAX_SEQUENCE_LEN = 25
+# UNK = 'UNK'
+# PAD = 'PAD'
+
+# def text_to_id_list(text, dictionary):
+#     return [dictionary.token2id.get(tok, dictionary.token2id.get(UNK))
+#             for tok in text_to_tokens(text)]
+
+# def texts_to_input(texts, dictionary):
+#     return sequence.pad_sequences(
+#         list(map(lambda x: text_to_id_list(x, dictionary), texts)), maxlen=MAX_SEQUENCE_LEN,
+#         padding='post', truncating='post', value=dictionary.token2id.get(PAD))
+
+# def text_to_tokens(text):
+#     return [tok.text.lower() for tok in nlp.tokenizer(text)
+#             if not (tok.is_punct or tok.is_quote)]
+
+# def build_dictionary(texts):
+#     d = Dictionary(text_to_tokens(t)for t in texts)
+#     d.filter_extremes(no_below=3, no_above=1)
+#     d.add_documents([[UNK, PAD]])
+#     d.compactify()
+#     return d
+
+
+# predict = texts_to_input(df.input, dictionary)
+
+# # print(len(dictionary))
+# x = list(predict)
+
+# newList = []
+
+# x = list(x[0])
+
+# newList.append(x)
+
+# print(newList)
+
+print([[4622, 8130, 656, 50, 4178, 73, 27, 1897, 98, 1099, 8129, 7552, 1424, 35388, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387]])
