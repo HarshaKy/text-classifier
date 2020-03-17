@@ -48,6 +48,9 @@ newList.append(x)
 
 print(newList)
 
+# arr = [[  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+#           0, 918,  25, 102, 288,   4, 642, 939, 668,  11, 463, 514]]
+
 # print(arr)
 
 # inputString = sys.argv[1]
