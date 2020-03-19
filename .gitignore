@@ -134,7 +134,7 @@ dmypy.json
 news.json
 
 # # waste
-# *.bin
+*.bin
 
 # node modules
 node_modules/
