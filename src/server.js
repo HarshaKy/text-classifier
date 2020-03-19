@@ -39,12 +39,12 @@ app.get('/sentiment', (req, res) => {
 app.post('/predict-sentiment', (req, res) => {
 
     async function processModel(){
-        const model = await tf.loadLayersModel('file://../models/sentiment/model.json')
+        const model = await tf.loadLayersModel('file://../models/sentiment/model-v2.json')
         
         console.log('before python')
 
         var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./../utils/preprocess-sentiment.py", req.body.test] )
+        var process = await spawn('python',["./../utils/preprocess-sentiment-v2.py", req.body.test] )
 
         console.log(JSON.parse(process.stdout))
 
@@ -52,16 +52,16 @@ app.post('/predict-sentiment', (req, res) => {
 
         prediciton = model.predict(tf.tensor(data)).dataSync()
 
-        var result
+        // var result
 
-        result1 = "Negative: " + ((1 - prediciton) * 100) + "%"
-        result2 = "\nPositive: " + (prediciton * 100) + "%"
+        // result1 = "Negative: " + ((1 - prediciton) * 100) + "%"
+        // result2 = "\nPositive: " + (prediciton * 100) + "%"
 
-        result = result1 + result2
+        // result = result1 + result2
 
         res.render('prediction', {
             title: 'Sentiment Prediction',
-            prediction: result
+            prediction: prediciton
         })
 
     }
