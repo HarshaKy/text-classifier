@@ -41,33 +41,29 @@ app.post('/predict-sentiment', (req, res) => {
     async function processModel(){
         const model = await tf.loadLayersModel('file://../models/sentiment/model.json')
         
-        var spawn = require("child_process").spawn;
-        var process = await spawn('python',["./../utils/preprocess-sentiment.py", req.body.test] );
+        console.log('before python')
 
-        await process.stdout.on('data', function(data) { 
+        var spawn = require("child_process").spawnSync
+        var process = await spawn('python',["./../utils/preprocess-sentiment.py", req.body.test] )
 
-            var data = JSON.parse(data)
+        console.log(JSON.parse(process.stdout))
 
-            // console.log(data)
+        var data = JSON.parse(process.stdout)
 
-            prediciton = model.predict(tf.tensor(data)).dataSync()[0]
+        prediciton = model.predict(tf.tensor(data)).dataSync()
 
-            // console.log(typeof data)
-            // console.log(prediciton)
+        var result
 
-            var verdict
+        result1 = "Negative: " + ((1 - prediciton) * 100) + "%"
+        result2 = "\nPositive: " + (prediciton * 100) + "%"
 
-            if (prediciton > 0.5) {
-                verdict = "Positive"
-            } else {
-                verdict = "Negative"
-            }
+        result = result1 + result2
 
-            res.render('prediction', {
-                title: 'Sentiment Prediction',
-                prediction: verdict
-            })
+        res.render('prediction', {
+            title: 'Sentiment Prediction',
+            prediction: result
         })
+
     }
 
     processModel()
@@ -81,35 +77,26 @@ app.get('/category', (req, res) => {
 })
 
 app.post('/predict-category', (req, res) => {
-    // res.send(req.body.test)
+
     async function processModel(){
         const model = await tf.loadLayersModel('file://../models/news/model.json')
         
         console.log('before python')
 
-        var spawn = require("child_process").spawn;
+        var spawn = require("child_process").spawnSync
         var process = await spawn('python',["./../utils/preprocess-news.py", req.body.test] );
 
-        console.log('after python')
+        console.log(JSON.parse(process.stdout))
 
-        await process.stdout.on('data', function(data) { 
+        var data = JSON.parse(process.stdout)
 
-            console.log('inside function')
-            
-            var data = JSON.parse(data)
+        prediciton = model.predict(tf.tensor(data)).dataSync()
 
-            console.log(data)
-
-            prediciton = model.predict(tf.tensor(data)).dataSync()
-
-            // console.log(typeof data)
-            // console.log(prediciton)
-
-            res.render('prediction', {
-                title: 'Category Prediction',
-                prediction: prediciton
-            })
+        res.render('prediction', {
+            title: 'Category Prediction',
+            prediction: prediciton
         })
+
     }
 
     processModel()
