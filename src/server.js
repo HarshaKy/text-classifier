@@ -8,9 +8,6 @@ const fs = require('fs')
 global.fetch = require('node-fetch')
 const port = 3000
 
-var arr_news = [[  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-          0,   0,   0,   0,   0,   0,   0,   0,   0,  55, 363, 801]]
-
 const app = express()
 
 const publicDirPath = path.join(__dirname, '../public')
@@ -51,13 +48,6 @@ app.post('/predict-sentiment', (req, res) => {
         var data = JSON.parse(process.stdout)
 
         prediciton = model.predict(tf.tensor(data)).dataSync()
-
-        // var result
-
-        // result1 = "Negative: " + ((1 - prediciton) * 100) + "%"
-        // result2 = "\nPositive: " + (prediciton * 100) + "%"
-
-        // result = result1 + result2
 
         res.render('prediction', {
             title: 'Sentiment Prediction',
