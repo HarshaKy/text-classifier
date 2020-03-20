@@ -102,7 +102,27 @@ app.post('/predict-category', (req, res) => {
     processModel()
 })
 
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About'
+    })
+})
+
 app.get('/sentiment/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Invalid URL'
+    })
+})
+
+app.get('/category/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Invalid URL'
+    })
+})
+
+app.get('/about/*', (req, res) => {
     res.render('404', {
         title: '404',
         errorMessage: 'Invalid URL'

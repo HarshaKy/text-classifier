@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Context Analyzer / Home</title>
+    <title>Context Analyzer / {{title}}</title>
 </head>
 <body>
     {{>header}}
+    <div id="info">
+        <p id="info-paragraph"> 
+            Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
+            NLP processes such as Sentiment Analysis, Multi-class text classification can be done effectively using this website. This is achieved by using
+            Node.js endpoints for each NLP task. 
+        </p>
+    </div>
     {{>footer}}
 </body>
 </html>

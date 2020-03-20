@@ -9,7 +9,7 @@
     {{>header}}
  
     <form action="/predict-sentiment" method="POST">
-        Input data: <input type="text" name="test">
+        Input data: <textarea type="text" name="test" rows="10" cols="60" required></textarea>
         <button type="submit">Predict</button>
     </form>
     {{>footer}}
