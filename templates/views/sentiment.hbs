@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Context Analyzer / {{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    {{>header}}
+    
+    <div class="mainContent">
+        {{>header}}
  
     <form action="/predict-sentiment" method="POST">
         Input data: <textarea type="text" name="test" rows="10" cols="60" required></textarea>
         <button type="submit">Predict</button>
     </form>
+    </div>
     {{>footer}}
 </body>
 </html>

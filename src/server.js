@@ -19,7 +19,7 @@ app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
 app.use(bodyParser.urlencoded({ extended: true}))
-app.use(express.static(path.join(publicDirPath)))
+app.use(express.static(publicDirPath))
 
 app.get('', (req, res) => {
     res.render('index', {
