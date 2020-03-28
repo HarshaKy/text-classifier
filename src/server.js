@@ -82,9 +82,19 @@ app.post('/predict-category', (req, res) => {
 
         prediciton = model.predict(tf.tensor(data)).dataSync()
 
+        var pred
+
+        var predString = ""
+
+        for (pred in prediciton) {
+            predString += prediciton[pred].toString() + " "
+        }
+
+        console.log(predString)
+
         res.render('prediction', {
             title: 'Category Prediction',
-            prediction: prediciton
+            prediction: predString
         })
 
     }
