@@ -36,12 +36,12 @@ app.get('/sentiment', (req, res) => {
 app.post('/predict-sentiment', (req, res) => {
 
     async function processModel(){
-        const model = await tf.loadLayersModel('file://../models/sentiment/model-v2.json')
+        const model = await tf.loadLayersModel('file://models/sentiment/model-v2.json')
         
         console.log('before python')
 
         var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./../utils/preprocess-sentiment-v2.py", req.body.test] )
+        var process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
 
         console.log(JSON.parse(process.stdout))
 
@@ -69,10 +69,10 @@ app.get('/category', (req, res) => {
 app.post('/predict-category', (req, res) => {
 
     async function processModel(){
-        const model = await tf.loadLayersModel('file://../models/news/model.json')
+        const model = await tf.loadLayersModel('file://models/news/model.json')
 
         var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./../utils/preprocess-news.py", req.body.test]);
+        var process = await spawn('python',["./utils/preprocess-news.py", req.body.test]);
 
         var data = JSON.parse(process.stdout)
 
