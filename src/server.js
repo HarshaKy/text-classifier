@@ -117,12 +117,12 @@ app.get('/spam', (req, res) => {
 app.post('/predict-spam', (req, res) => {
 
     async function processModel(){
-        const model = await tf.loadLayersModel('file://models/spam/model-v2.json')
+        const model = await tf.loadLayersModel('file://models/spam/model.json')
         
         console.log('before python')
 
         var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
+        var process = await spawn('python',["./utils/preprocess-spam.py", req.body.test] )
 
         console.log(JSON.parse(process.stdout))
 
