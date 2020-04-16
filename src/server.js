@@ -108,6 +108,39 @@ app.post('/predict-category', (req, res) => {
     processModel()
 })
 
+app.get('/spam', (req, res) => {
+    res.render('spam', {
+        title: 'Spam or Ham'
+    })
+})
+
+app.post('/predict-spam', (req, res) => {
+
+    async function processModel(){
+        const model = await tf.loadLayersModel('file://models/spam/model-v2.json')
+        
+        console.log('before python')
+
+        var spawn = require("child_process").spawnSync
+        var process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
+
+        console.log(JSON.parse(process.stdout))
+
+        var data = JSON.parse(process.stdout)
+
+        prediciton = model.predict(tf.tensor(data)).dataSync()
+
+        res.render('prediction', {
+            title: 'Sentiment Prediction',
+            prediction: prediciton
+        })
+
+    }
+
+    processModel()
+        
+})
+
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About'
