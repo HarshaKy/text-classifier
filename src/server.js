@@ -131,7 +131,7 @@ app.post('/predict-spam', (req, res) => {
         prediciton = model.predict(tf.tensor(data)).dataSync()
 
         res.render('prediction', {
-            title: 'Sentiment Prediction',
+            title: 'Spam or Ham Prediction',
             prediction: prediciton
         })
 

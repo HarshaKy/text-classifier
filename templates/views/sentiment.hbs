@@ -6,16 +6,19 @@
     <title>Context Analyzer / {{title}}</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+{{>header}}
 <body>
-    
+      <h1>{{title}}</h1>
     <div class="mainContent">
-        {{>header}}
+        
  
     <form action="/predict-sentiment" method="POST">
-        Input data: <textarea type="text" name="test" rows="10" cols="80" required></textarea>
+        Input data: <br>
+        <textarea type="text" name="test" rows="10" cols="80" required></textarea> <br>
         <button type="submit">Predict</button>
     </form>
     </div>
-    {{>footer}}
+    
 </body>
+{{>footer}}
 </html>

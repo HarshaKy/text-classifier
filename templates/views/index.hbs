@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="/css/styles.css">
 
 </head>
+{{>header}}
 <body>
-    
+      <h1>{{title}}</h1>
     <div class="mainContent">
-        {{>header}}
+        
         <p id="info-paragraph"> 
             Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
             NLP processes such as Sentiment Analysis, Multi-class text classification can be done effectively using this website. This is achieved by using
             Node.js endpoints for each NLP task. 
         </p>
     </div>
-    {{>footer}}
+    
 </body>
+{{>footer}}
 </html>
