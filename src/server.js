@@ -161,6 +161,13 @@ app.get('/category/*', (req, res) => {
     })
 })
 
+app.get('/spam/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Invalid URL'
+    })
+})
+
 app.get('/about/*', (req, res) => {
     res.render('404', {
         title: '404',
