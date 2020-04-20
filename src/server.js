@@ -29,7 +29,7 @@ app.get('', (req, res) => {
 
 app.get('/sentiment', (req, res) => {
     res.render('sentiment', {
-        title: 'Sentiment Analysis'
+        title: 'SENTIMENT ANALYSIS'
     })
 })
 
@@ -50,7 +50,7 @@ app.post('/predict-sentiment', (req, res) => {
         prediciton = model.predict(tf.tensor(data)).dataSync()
 
         res.render('prediction', {
-            title: 'Sentiment Prediction',
+            title: 'SENTIMENT PREDICTION',
             prediction: prediciton
         })
 
@@ -62,7 +62,7 @@ app.post('/predict-sentiment', (req, res) => {
 
 app.get('/category', (req, res) => {
     res.render('category', {
-        title: 'Category Prediction'
+        title: 'CATEGORY PREDICTION'
     })
 })
 
@@ -99,7 +99,7 @@ app.post('/predict-category', (req, res) => {
         console.log(arr)
 
         res.render('prediction', {
-            title: 'Category Prediction',
+            title: 'CATEGORY PREDICTION',
             prediction: JSON.stringify(arr)
         })
 
@@ -110,7 +110,7 @@ app.post('/predict-category', (req, res) => {
 
 app.get('/spam', (req, res) => {
     res.render('spam', {
-        title: 'Spam or Ham'
+        title: 'SPAM OR HAM'
     })
 })
 
@@ -131,7 +131,7 @@ app.post('/predict-spam', (req, res) => {
         prediciton = model.predict(tf.tensor(data)).dataSync()
 
         res.render('prediction', {
-            title: 'Spam or Ham Prediction',
+            title: 'SPAM OR HAM PREDICTION',
             prediction: prediciton
         })
 
@@ -143,7 +143,7 @@ app.post('/predict-spam', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        title: 'About'
+        title: 'ABOUT'
     })
 })
 

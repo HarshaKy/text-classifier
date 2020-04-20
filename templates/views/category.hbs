@@ -32,10 +32,12 @@ body, html {
      
     <div class="mainContent">
 
-          <h1>{{title}}</h1>
+          <div class="w3-display" style="white-space:nowrap">
+            <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">{{title}}
+        </div>
 
           <form action="/predict-category" method="POST">
-            Input data: <br>
+            <h4>Input data:</h4> 
             <textarea type="text" name="test" rows="10" cols="80" required></textarea> <br>
             <button type="submit">Predict</button>
         </form>
