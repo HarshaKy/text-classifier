@@ -3,9 +3,9 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const hbs = require('hbs')
 
-const {sentimentAnalysis} = require('./../api/sentiment')
-const {categoryPrediction} = require('./../api/category')
-const {spamPrediction} = require('./../api/spam')
+const {sentimentAnalysis} = require('./../middleware/sentiment')
+const {categoryPrediction} = require('./../middleware/category')
+const {spamPrediction} = require('./../middleware/spam')
 
 global.fetch = require('node-fetch')
 
@@ -64,6 +64,16 @@ app.post('/predict-spam', (req, res) => {
 
     spamPrediction(req, res)
         
+})
+
+app.get('/api', (req, res) => {
+    res.render('demo', {
+        title: 'asdf'
+    })
+})
+
+app.get('/api/sentiment', (req, res) => {
+    sentimentAnalysis(req, res)
 })
 
 app.get('/about', (req, res) => {
