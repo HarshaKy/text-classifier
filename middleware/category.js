@@ -4,7 +4,7 @@ async function categoryPrediction(req, res){
     const model = await tf.loadLayersModel('file://models/news/model.json')
 
     let spawn = require("child_process").spawnSync
-    let process = await spawn('python',["./utils/preprocess-news.py", req.body.test]);
+    let process = await spawn('python',["./utils/preprocess-news.py", req.body.inputText]);
 
     let data = JSON.parse(process.stdout)
 

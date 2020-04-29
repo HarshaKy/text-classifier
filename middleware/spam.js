@@ -6,7 +6,7 @@ async function spamPrediction(req, res){
     console.log('before python')
 
     var spawn = require("child_process").spawnSync
-    var process = await spawn('python',["./utils/preprocess-spam.py", req.body.test] )
+    var process = await spawn('python',["./utils/preprocess-spam.py", req.body.inputText] )
 
     console.log(JSON.parse(process.stdout))
 

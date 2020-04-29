@@ -38,7 +38,7 @@ body, html {
 
           <form action="/predict-category" method="POST">
             <h4>Input data:</h4> 
-            <textarea type="text" name="test" rows="10" cols="80" required></textarea> <br>
+            <textarea type="text" name="inputText" rows="10" cols="80" required></textarea> <br>
             <button type="submit">Predict</button>
         </form>
     
@@ -71,35 +71,3 @@ function toggleFunction() {
 </body>
 {{>footer}}
 </html>
-
-
-
-
-
-
-
-{{!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Context Analyzer / {{title}}</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-{{>header}}
-<body>
-      <h1>{{title}}</h1>
-    <div class="mainContent">
-        
- 
-        <form action="/predict-category" method="POST">
-            Input data: <br>
-            <textarea type="text" name="test" rows="10" cols="80" required></textarea> <br>
-            <button type="submit">Predict</button>
-        </form>
-    </div>
-    
-   
-</body>
- {{>footer}}
-</html> --}}

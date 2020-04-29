@@ -6,7 +6,7 @@ async function sentimentAnalysis(req, res){
     console.log('before python')
 
     let spawn = require("child_process").spawnSync
-    let process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
+    let process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.inputText] )
 
     console.log(JSON.parse(process.stdout))
 
