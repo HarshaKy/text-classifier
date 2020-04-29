@@ -5,6 +5,10 @@ const hbs = require('hbs')
 const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs')
 
+const {sentimentAnalysis} = require('./../api/sentiment')
+const {categoryPrediction} = require('./../api/category')
+const {spamPrediction} = require('./../api/spam')
+
 global.fetch = require('node-fetch')
 const port = 3000
 
@@ -35,28 +39,7 @@ app.get('/sentiment', (req, res) => {
 
 app.post('/predict-sentiment', (req, res) => {
 
-    async function processModel(){
-        const model = await tf.loadLayersModel('file://models/sentiment/model-v2.json')
-        
-        console.log('before python')
-
-        var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
-
-        console.log(JSON.parse(process.stdout))
-
-        var data = JSON.parse(process.stdout)
-
-        prediciton = model.predict(tf.tensor(data)).dataSync()
-
-        res.render('prediction', {
-            title: 'SENTIMENT PREDICTION',
-            prediction: prediciton
-        })
-
-    }
-
-    processModel()
+    sentimentAnalysis(req, res)
         
 })
 
@@ -68,44 +51,8 @@ app.get('/category', (req, res) => {
 
 app.post('/predict-category', (req, res) => {
 
-    async function processModel(){
-        const model = await tf.loadLayersModel('file://models/news/model.json')
+    categoryPrediction(req, res)
 
-        var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./utils/preprocess-news.py", req.body.test]);
-
-        var data = JSON.parse(process.stdout)
-
-        prediciton = model.predict(tf.tensor(data)).dataSync()
-
-        var arr = {
-            "Black Voices": prediciton[0], 
-            "Business ": prediciton[1], 
-            "Comedy ": prediciton[2], 
-            "Entertainment ": prediciton[3], 
-            "Food and Drink": prediciton[4], 
-            "Healthy Living": prediciton[5], 
-            "Home Living": prediciton[6], 
-            "Parenting ": prediciton[7], 
-            "Parents ": prediciton[8], 
-            "Politics ": prediciton[9], 
-            "Queer Voices": prediciton[10], 
-            "Sports ": prediciton[11], 
-            "Style and Beauty": prediciton[12], 
-            "Travel ": prediciton[13], 
-            "Wellness ": prediciton[14]
-        }
-
-        console.log(arr)
-
-        res.render('prediction', {
-            title: 'CATEGORY PREDICTION',
-            prediction: JSON.stringify(arr)
-        })
-
-    }
-
-    processModel()
 })
 
 app.get('/spam', (req, res) => {
@@ -116,28 +63,7 @@ app.get('/spam', (req, res) => {
 
 app.post('/predict-spam', (req, res) => {
 
-    async function processModel(){
-        const model = await tf.loadLayersModel('file://models/spam/model.json')
-        
-        console.log('before python')
-
-        var spawn = require("child_process").spawnSync
-        var process = await spawn('python',["./utils/preprocess-spam.py", req.body.test] )
-
-        console.log(JSON.parse(process.stdout))
-
-        var data = JSON.parse(process.stdout)
-
-        prediciton = model.predict(tf.tensor(data)).dataSync()
-
-        res.render('prediction', {
-            title: 'SPAM OR HAM PREDICTION',
-            prediction: prediciton
-        })
-
-    }
-
-    processModel()
+    spamPrediction(req, res)
         
 })
 
