@@ -19,12 +19,8 @@ body, html {
   line-height: 1.8;
 }
 
-
-
-
 .w3-wide {letter-spacing: 10px;}
 .w3-hover-opacity {cursor: pointer;}
-
 
 </style>
 {{>header}}
@@ -36,15 +32,68 @@ body, html {
           <div class="w3-display" style="white-space:nowrap">
             <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">{{title}}
         </div>
-		<form action="/api/sentiment" method="GET">
+
+        <br><br>
+        <h5>Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
+            NLP processes such as Sentiment Analysis, Multi-class text classification can be done effectively using the APIs offered as services. This is achieved by using
+            Node.js endpoints for each NLP task. <br>
+            Context Analyzer provides 3 APIs currently: <br>
+            <a style="color: yellow;" href="#sentimentAnalysisH1">1. Sentiment Analysis API</a> <br>
+            <a style="color: yellow;" href="#multiClassH1">2. Multi-class CLassification API</a> <br>
+            <a style="color: yellow;" href="#spamH1">3. Spam or Ham API</a> <br>
+        </h5>
+<br><br>
+        <h1 id="sentimentAnalysisH1" style="color: yellow;">
+            1. Sentiment Analysis
+        </h1>
+        <h5>
+            The sentiment analysis API takes in input from the user and returns a JSON object with predictions. <br>
+            Example: A part of a review for the movie '1917'.  
+            Click on it to get JSON object with predictions as response.
+            <a target="_blank" href="http://localhost:3000/api/sentiment?predict=From+a+technical+standpoint%2C+1917+is+a+cinematic+achievement+that+captures+the+horror%2C+and+fright+of+war+with+its+incredible%E2%80%94+JAW+DROPPING+one+takes%2C+that+are+executed+with+masterful+coordination+and+attention+to+each+detail%2C+that+makes+all+the+hidden+cuts+so+seamless">
+            <p style="background-color: azure; color:black;">From a technical standpoint, 1917 is a cinematic 
+                achievement that captures the horror, and fright of war with its 
+                incredible— JAW DROPPING one takes, that are executed with masterful coordination and attention to
+                 each detail, that makes all the hidden cuts so seamless</p>  </a>
+
+                 Or you can try it with your own text using the input field below!
+        </h5>
+
+        
+		<form action="/api/sentiment" method="GET" target="_blank">
 			<input name="predict" type="text" placeholder="Sentiment Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
 
-		<form action="/api/category" method="GET">
+        <br><br>
+        <h1 id="multiClassH1" style="color: yellow;">
+            2. Multi-class Classification
+        </h1>
+
+        <h5>
+            The Multi-class classification API provides probability scores for 15 diffrent classes. The input from the user is used for prediction and the API sends a JSON response 
+            with probability scores for each of the 15 classes. <br>
+            Example: This news article. Click on it to get JSON object with predictions as response.
+           <a target="_blank" href="http://localhost:3000/api/category?predict=On+April+15%2C+1947%2C+Jackie+Robinson+broke+Baseball%E2%80%99s+color+barrier+when+he+made+his+historic+MLB+debut.+Every+year+on+April+15%2C+Baseball+honors+Jackie%E2%80%99s+legacy+by+celebrating+his+life%2C+values+and+accomplishments.+Jackie%E2%80%99s+number+was+retired+throughout+the+Majors+in+1997%3B+in+2004%2C+April+15+was+named+Jackie+Robinson+Day%3B+and+since+2009%2C+every+player+and+all+on-field+personnel+wear+his+No.+42+during+games+scheduled+on+Jackie+Robinson+Day.">
+           <p style="background-color: azure; color:black;">On April 15, 1947, Jackie Robinson broke Baseball’s color barrier when he made his historic MLB debut. 
+                Every year on April 15, Baseball honors Jackie’s legacy by celebrating his life, values and accomplishments. Jackie’s number was retired throughout the Majors in 
+                1997; in 2004, April 15 was named Jackie Robinson Day; and since 
+                2009, every player and all on-field personnel wear his No. 42 during games scheduled on Jackie Robinson Day.</p>
+           
+           </a> 
+            
+        Or you can try it with your own text using the input field below!
+        </h5>
+
+		<form action="/api/category" method="GET" target="_blank">
 			<input name="predict" type="text" placeholder="Category Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
+<br><br>
+
+     <h1 id="spamH1" style="color: yellow;">
+            3. Spam or Ham Prediction
+        </h1>
 
 		<form action="/api/spam" method="GET">
 			<input name="predict" type="text" placeholder="Spam Text" required>

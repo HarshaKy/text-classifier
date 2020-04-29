@@ -7,7 +7,7 @@ body {
 
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh;	
   background-color: slategray;
   
 }
@@ -16,8 +16,10 @@ body {
 	margin-top: 100px;
 	flex-grow: 1;
 	padding: 0 16px;
+	max-width: 800px;
+	display: inline-block;
+	align-items: flex-start;
 }
-
 
 
 footer {
@@ -126,6 +128,7 @@ a {
 	padding:0.35em 1.2em;
 	border:0.1em solid #FFFFFF;
 	margin:0 0.3em 0.3em 0;
+	width: fit-content;
 	border-radius:0.12em;
 	box-sizing: border-box;
 	text-decoration:none;
