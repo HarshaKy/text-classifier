@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+    <title>Context Analyzer / {{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: white;
+  line-height: 1.8;
+}
+
+
+
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+
+</style>
+{{>header}}
+<body>
+     
+    <div class="mainContent">
+
+         
+          <div class="w3-display" style="white-space:nowrap">
+            <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">{{title}}
+        </div>
+		<form action="/api/sentiment" method="GET">
+			<input name="predict" type="text" placeholder="Sentiment Text">
+			<button onclick="submit">Predict</button>
+		</form>
+
+		<form action="/api/category" method="GET">
+			<input name="predict" type="text" placeholder="Category Text">
+			<button onclick="submit">Predict</button>
+		</form>
+
+		<form action="/api/spam" method="GET">
+			<input name="predict" type="text" placeholder="Spam Text">
+			<button onclick="submit">Predict</button>
+		</form>
+          <h5>Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
+            NLP processes such as Sentiment Analysis, Multi-class text classification can be done effectively using this website. This is achieved by using
+            Node.js endpoints for each NLP task. </h5>
+    
+    </div>
+    <script>
+// Modal Image Gallery
+
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+   
+        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+   
+}
+
+myFunction();
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+</body>
+{{>footer}}
+</html>

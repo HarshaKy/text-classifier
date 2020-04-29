@@ -7,6 +7,10 @@ const {sentimentAnalysis} = require('./../middleware/sentiment')
 const {categoryPrediction} = require('./../middleware/category')
 const {spamPrediction} = require('./../middleware/spam')
 
+const {sentimentAPI} = require('./../api/sentimentAPI')
+const {categoryAPI} = require('./../api/categoryAPI')
+const {spamAPI} = require('./../api/spamAPI')
+
 global.fetch = require('node-fetch')
 
 const port = 3000
@@ -67,13 +71,21 @@ app.post('/predict-spam', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
-    res.render('demo', {
-        title: 'asdf'
+    res.render('api', {
+        title: 'CONTEXT ANALYZER API'
     })
 })
 
 app.get('/api/sentiment', (req, res) => {
-    sentimentAnalysis(req, res)
+    sentimentAPI(req, res)
+})
+
+app.get('/api/category', (req, res) => {
+    categoryAPI(req, res)
+})
+
+app.get('/api/spam', (req, res) => {
+    spamAPI(req, res)
 })
 
 app.get('/about', (req, res) => {
