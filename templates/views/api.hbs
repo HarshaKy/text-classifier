@@ -37,17 +37,17 @@ body, html {
             <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">{{title}}
         </div>
 		<form action="/api/sentiment" method="GET">
-			<input name="predict" type="text" placeholder="Sentiment Text">
+			<input name="predict" type="text" placeholder="Sentiment Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
 
 		<form action="/api/category" method="GET">
-			<input name="predict" type="text" placeholder="Category Text">
+			<input name="predict" type="text" placeholder="Category Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
 
 		<form action="/api/spam" method="GET">
-			<input name="predict" type="text" placeholder="Spam Text">
+			<input name="predict" type="text" placeholder="Spam Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
           <h5>Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
