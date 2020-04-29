@@ -94,34 +94,6 @@ app.get('/about', (req, res) => {
     })
 })
 
-app.get('/sentiment/*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        errorMessage: 'Invalid URL'
-    })
-})
-
-app.get('/category/*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        errorMessage: 'Invalid URL'
-    })
-})
-
-app.get('/spam/*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        errorMessage: 'Invalid URL'
-    })
-})
-
-app.get('/about/*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        errorMessage: 'Invalid URL'
-    })
-})
-
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
