@@ -3,37 +3,34 @@ const tf = require('@tensorflow/tfjs-node')
 async function categoryPrediction(req, res){
     const model = await tf.loadLayersModel('file://models/news/model.json')
 
-    var spawn = require("child_process").spawnSync
-    var process = await spawn('python',["./utils/preprocess-news.py", req.body.test]);
+    let spawn = require("child_process").spawnSync
+    let process = await spawn('python',["./utils/preprocess-news.py", req.body.test]);
 
-    var data = JSON.parse(process.stdout)
+    let data = JSON.parse(process.stdout)
 
     prediciton = model.predict(tf.tensor(data)).dataSync()
 
-    var arr = {
-        "Black Voices": prediciton[0], 
-        "Business ": prediciton[1], 
-        "Comedy ": prediciton[2], 
-        "Entertainment ": prediciton[3], 
-        "Food and Drink": prediciton[4], 
-        "Healthy Living": prediciton[5], 
-        "Home Living": prediciton[6], 
-        "Parenting ": prediciton[7], 
-        "Parents ": prediciton[8], 
-        "Politics ": prediciton[9], 
-        "Queer Voices": prediciton[10], 
-        "Sports ": prediciton[11], 
-        "Style and Beauty": prediciton[12], 
-        "Travel ": prediciton[13], 
-        "Wellness ": prediciton[14]
+    let result = {
+        prediciton: {
+            black_voices: prediciton[0], 
+            business: prediciton[1], 
+            comedy: prediciton[2], 
+            entertainment: prediciton[3], 
+            food_drink: prediciton[4], 
+            healthy_living: prediciton[5], 
+            home_living: prediciton[6], 
+            parenting: prediciton[7], 
+            parents: prediciton[8], 
+            politics: prediciton[9], 
+            queer_voices: prediciton[10], 
+            sports: prediciton[11], 
+            style_beauty: prediciton[12], 
+            travel: prediciton[13], 
+            wellness: prediciton[14]
+        }
     }
 
-    console.log(arr)
-
-    res.render('prediction', {
-        title: 'CATEGORY PREDICTION',
-        prediction: JSON.stringify(arr)
-    })
+    res.send(result)
 
 }
 

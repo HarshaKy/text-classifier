@@ -12,12 +12,15 @@ async function spamPrediction(req, res){
 
     var data = JSON.parse(process.stdout)
 
-    prediciton = model.predict(tf.tensor(data)).dataSync()
+    prediciton = model.predict(tf.tensor(data)).dataSync()[0]
 
-    res.render('prediction', {
-        title: 'SPAM OR HAM PREDICTION',
-        prediction: prediciton
-    })
+    let result = {
+        prediciton: {
+            spam: prediciton
+        }
+    }
+
+    res.send(result)
 
 }
 

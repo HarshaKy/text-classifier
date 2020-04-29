@@ -5,19 +5,22 @@ async function sentimentAnalysis(req, res){
     
     console.log('before python')
 
-    var spawn = require("child_process").spawnSync
-    var process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
+    let spawn = require("child_process").spawnSync
+    let process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.body.test] )
 
     console.log(JSON.parse(process.stdout))
 
-    var data = JSON.parse(process.stdout)
+    let data = JSON.parse(process.stdout)
 
-    prediciton = model.predict(tf.tensor(data)).dataSync()
+    prediciton = model.predict(tf.tensor(data)).dataSync()[0]
 
-    res.render('prediction', {
-        title: 'SENTIMENT PREDICTION',
-        prediction: prediciton
-    })
+    let result = {
+        prediciton: {
+            sentiment: prediciton
+        }
+    }
+
+    res.send(result)
 
 }
 
