@@ -14,13 +14,13 @@ async function spamAPI(req, res){
 
     var data = JSON.parse(process.stdout)
 
-    prediction = model.predict(tf.tensor(data)).dataSync()[0]
+    score = model.predict(tf.tensor(data)).dataSync()[0]
 
-    let predText = prediction >= 0.5 ? 'Spam'  : 'Not Spam'
+    let predText = score >= 0.5 ? 'Spam'  : 'Not Spam'
 
     let result = {
         prediction: {
-            score: prediction,
+            score,
             verdict: predText
         }
     }

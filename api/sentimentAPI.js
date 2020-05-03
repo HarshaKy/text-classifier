@@ -14,13 +14,13 @@ async function sentimentAPI(req, res){
 
     let data = JSON.parse(process.stdout)
 
-    prediction = model.predict(tf.tensor(data)).dataSync()[0]
+    score = model.predict(tf.tensor(data)).dataSync()[0]
 
-    let predText = prediction >= 0.5 ? 'Positive'  : 'Negative'
+    let predText = score >= 0.5 ? 'Positive'  : 'Negative'
 
     let result = {
         prediction: {
-            score: prediction,
+            score,
             sentiment: predText
         }
     }

@@ -1,4 +1,5 @@
 const tf = require('@tensorflow/tfjs-node')
+const _ = require('underscore')
 
 async function categoryAPI(req, res){
     const model = await tf.loadLayersModel('file://models/news/model.json')
@@ -35,13 +36,18 @@ async function categoryAPI(req, res){
     prediction.sort()
 
     let verdict = prediction[14]
+
+    let verdictText = (_.invert(score))[verdict]
     
     let result = {
-        score: score,
-        verdict: verdict
+        prediction: {
+            score,
+            verdict: {
+                category_score: verdict,
+                category: verdictText
+            }
+        }
     }
-
-    console.log(result.verdict)
 
     res.send(result)
 
