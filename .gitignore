@@ -141,3 +141,6 @@ node_modules/
 
 # playground folder
 playground/
+
+# older notebook versions
+old/
