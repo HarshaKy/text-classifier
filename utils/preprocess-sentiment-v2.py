@@ -34,7 +34,6 @@ def text_to_tokens(text):
 
 predict = texts_to_input(df.input, dictionary)
 
-# print(len(dictionary))
 x = list(predict)
 
 newList = []
@@ -44,5 +43,3 @@ x = list(x[0])
 newList.append(x)
 
 print(newList)
-
-# print([[4622, 8130, 656, 50, 4178, 73, 27, 1897, 98, 1099, 8129, 7552, 1424, 35388, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387, 35387]])

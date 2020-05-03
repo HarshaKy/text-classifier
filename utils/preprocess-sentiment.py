@@ -48,5 +48,3 @@ x = list(x[0])
 newList.append(x)
 
 print(newList)
-
-# print(arr)

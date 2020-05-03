@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
@@ -11,6 +13,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
+
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
@@ -23,17 +27,23 @@ body, html {
 .w3-hover-opacity {cursor: pointer;}
 
 </style>
+
+
 {{>header}}
+
+
 <body>
      
     <div class="mainContent">
 
          
-          <div class="w3-display" style="white-space:nowrap">
+        <div class="w3-display" style="white-space:nowrap">
             <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">{{title}}
         </div>
 
         <br><br>
+        
+        
         <h5>Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
             NLP processes such as Sentiment Analysis, Multi-class text classification can be done effectively using the APIs offered as services. This is achieved by using
             Node.js endpoints for each NLP task. <br>
@@ -42,10 +52,14 @@ body, html {
             <a style="color: yellow;" href="#multiClassH1">2. Multi-class CLassification API</a> <br>
             <a style="color: yellow;" href="#spamH1">3. Spam or Ham API</a> <br>
         </h5>
-<br><br>
+
+        <br><br>
+        
         <h1 id="sentimentAnalysisH1" style="color: yellow;">
             1. Sentiment Analysis
         </h1>
+        
+        
         <h5>
             The sentiment analysis API takes in input from the user and returns a JSON object with predictions. <br>
             Example: A part of a review for the movie '1917'.  
@@ -66,6 +80,7 @@ body, html {
 		</form>
 
         <br><br>
+        
         <h1 id="multiClassH1" style="color: yellow;">
             2. Multi-class Classification
         </h1>
@@ -89,9 +104,10 @@ body, html {
 			<input name="predict" type="text" placeholder="Category Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
-<br><br>
 
-     <h1 id="spamH1" style="color: yellow;">
+        <br><br>
+
+        <h1 id="spamH1" style="color: yellow;">
             3. Spam or Ham Prediction
         </h1>
 
@@ -99,36 +115,43 @@ body, html {
 			<input name="predict" type="text" placeholder="Spam Text" required>
 			<button onclick="submit">Predict</button>
 		</form>
-          <h5>Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
+        
+        <h5>Context Analyzer provides NLP services using Tensorflow.js, Node.js, Express.js. <br>
             NLP processes such as Sentiment Analysis, Multi-class text classification can be done effectively using this website. This is achieved by using
             Node.js endpoints for each NLP task. </h5>
     
     </div>
+
+    
     <script>
 // Modal Image Gallery
 
 
 // Change style of navbar on scroll
-window.onscroll = function() {myFunction()};
-function myFunction() {
-    var navbar = document.getElementById("myNavbar");
+            window.onscroll = function() {myFunction()};
+            function myFunction() {
+                var navbar = document.getElementById("myNavbar");
    
-        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+                navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
    
-}
+            }
 
-myFunction();
+            myFunction();
 
 // Used to toggle the menu on small screens when clicking on the menu button
-function toggleFunction() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
+            function toggleFunction() {
+                var x = document.getElementById("navDemo");
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+
+    </script>
+
 </body>
-{{>footer}}
+    
+    {{>footer}}
+
 </html>
