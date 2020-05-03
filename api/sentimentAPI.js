@@ -5,18 +5,23 @@ async function sentimentAPI(req, res){
     
     console.log('sentiment analysis api')
 
+    let predInput = req.query.predict || req.body.inputText
+
     let spawn = require("child_process").spawnSync
-    let process = await spawn('python',["./utils/preprocess-sentiment-v2.py", req.query.predict] )
+    let process = await spawn('python',["./utils/preprocess-sentiment-v2.py", predInput] )
 
     console.log(JSON.parse(process.stdout))
 
     let data = JSON.parse(process.stdout)
 
-    prediciton = model.predict(tf.tensor(data)).dataSync()[0]
+    prediction = model.predict(tf.tensor(data)).dataSync()[0]
+
+    let predText = prediction >= 0.5 ? 'Positive'  : 'Negative'
 
     let result = {
-        prediciton: {
-            sentiment: prediciton
+        prediction: {
+            score: prediction,
+            sentiment: predText
         }
     }
 

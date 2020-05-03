@@ -3,10 +3,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const hbs = require('hbs')
 
-const {sentimentAnalysis} = require('./../middleware/sentiment')
-const {categoryPrediction} = require('./../middleware/category')
-const {spamPrediction} = require('./../middleware/spam')
-
 const {sentimentAPI} = require('./../api/sentimentAPI')
 const {categoryAPI} = require('./../api/categoryAPI')
 const {spamAPI} = require('./../api/spamAPI')
@@ -42,7 +38,7 @@ app.get('/sentiment', (req, res) => {
 
 app.post('/predict-sentiment', (req, res) => {
 
-    sentimentAnalysis(req, res)
+    sentimentAPI(req, res)
         
 })
 
@@ -54,7 +50,7 @@ app.get('/category', (req, res) => {
 
 app.post('/predict-category', (req, res) => {
 
-    categoryPrediction(req, res)
+    categoryAPI(req, res)
 
 })
 
@@ -66,7 +62,7 @@ app.get('/spam', (req, res) => {
 
 app.post('/predict-spam', (req, res) => {
 
-    spamPrediction(req, res)
+    spamAPI(req, res)
         
 })
 

@@ -3,34 +3,45 @@ const tf = require('@tensorflow/tfjs-node')
 async function categoryAPI(req, res){
     const model = await tf.loadLayersModel('file://models/news/model.json')
 
-    console.log('category prediciton api')
+    console.log('category prediction api')
+
+    let predInput = req.query.predict || req.body.inputText
 
     let spawn = require("child_process").spawnSync
-    let process = await spawn('python',["./utils/preprocess-news.py", req.query.predict]);
+    let process = await spawn('python',["./utils/preprocess-news.py", predInput]);
 
     let data = JSON.parse(process.stdout)
 
-    prediciton = model.predict(tf.tensor(data)).dataSync()
+    prediction = model.predict(tf.tensor(data)).dataSync()
 
-    let result = {
-        prediciton: {
-            black_voices: prediciton[0], 
-            business: prediciton[1], 
-            comedy: prediciton[2], 
-            entertainment: prediciton[3], 
-            food_drink: prediciton[4], 
-            healthy_living: prediciton[5], 
-            home_living: prediciton[6], 
-            parenting: prediciton[7], 
-            parents: prediciton[8], 
-            politics: prediciton[9], 
-            queer_voices: prediciton[10], 
-            sports: prediciton[11], 
-            style_beauty: prediciton[12], 
-            travel: prediciton[13], 
-            wellness: prediciton[14]
-        }
+    score = {
+        black_voices: prediction[0], 
+        business: prediction[1], 
+        comedy: prediction[2], 
+        entertainment: prediction[3], 
+        food_drink: prediction[4], 
+        healthy_living: prediction[5], 
+        home_living: prediction[6], 
+        parenting: prediction[7], 
+        parents: prediction[8], 
+        politics: prediction[9], 
+        queer_voices: prediction[10], 
+        sports: prediction[11], 
+        style_beauty: prediction[12], 
+        travel: prediction[13], 
+        wellness: prediction[14]
     }
+    
+    prediction.sort()
+
+    let verdict = prediction[14]
+    
+    let result = {
+        score: score,
+        verdict: verdict
+    }
+
+    console.log(result.verdict)
 
     res.send(result)
 

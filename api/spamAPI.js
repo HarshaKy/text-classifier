@@ -5,18 +5,23 @@ async function spamAPI(req, res){
     
     console.log('spam api')
 
+    let predInput = req.query.predict || req.body.inputText
+
     var spawn = require("child_process").spawnSync
-    var process = await spawn('python',["./utils/preprocess-spam.py", req.query.predict] )
+    var process = await spawn('python',["./utils/preprocess-spam.py", predInput] )
 
     console.log(JSON.parse(process.stdout))
 
     var data = JSON.parse(process.stdout)
 
-    prediciton = model.predict(tf.tensor(data)).dataSync()[0]
+    prediction = model.predict(tf.tensor(data)).dataSync()[0]
+
+    let predText = prediction >= 0.5 ? 'Spam'  : 'Not Spam'
 
     let result = {
-        prediciton: {
-            spam: prediciton
+        prediction: {
+            score: prediction,
+            verdict: predText
         }
     }
 
