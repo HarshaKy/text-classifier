@@ -10,8 +10,6 @@ async function spamAPI(req, res){
     var spawn = require("child_process").spawnSync
     var process = await spawn('python',["./utils/preprocess-spam.py", predInput] )
 
-    console.log(JSON.parse(process.stdout))
-
     var data = JSON.parse(process.stdout)
 
     score = model.predict(tf.tensor(data)).dataSync()[0]

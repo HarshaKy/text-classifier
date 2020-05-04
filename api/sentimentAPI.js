@@ -10,8 +10,6 @@ async function sentimentAPI(req, res){
     let spawn = require("child_process").spawnSync
     let process = await spawn('python',["./utils/preprocess-sentiment-v2.py", predInput] )
 
-    console.log(JSON.parse(process.stdout))
-
     let data = JSON.parse(process.stdout)
 
     score = model.predict(tf.tensor(data)).dataSync()[0]

@@ -34,12 +34,12 @@ def text_to_tokens(text):
 
 predict = texts_to_input(df.input, dictionary)
 
-x = list(predict)
+arr = list(predict)
 
-newList = []
+arr = list(arr[0])
 
-x = list(x[0])
+predictionInput = []
 
-newList.append(x)
+predictionInput.append(arr)
 
-print(newList)
+print(predictionInput)
