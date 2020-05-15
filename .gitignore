@@ -136,6 +136,9 @@ news.json
 # # waste
 *.bin
 
+# not tracking h5 models as file size is large
+*.h5
+
 # node modules
 node_modules/
 
