@@ -56,7 +56,7 @@ app.post('/predict-category', (req, res) => {
 
 app.get('/spam', (req, res) => {
     res.render('spam', {
-        title: 'SPAM OR HAM'
+        title: 'SPAM DETECTION'
     })
 })
 
