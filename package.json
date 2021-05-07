@@ -29,6 +29,6 @@
     "nodemon": "^2.0.2",
     "request": "^2.88.2",
     "require": "^2.4.20",
-    "underscore": "^1.10.2"
+    "underscore": "^1.12.1"
   }
 }
